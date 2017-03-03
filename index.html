@@ -61,6 +61,73 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-七牛云图片存储" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/03/03/七牛云图片存储/" class="article-date">
+  <time datetime="2017-03-03T07:35:32.000Z" itemprop="datePublished">2017-03-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/03/七牛云图片存储/">七牛云图片存储</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>转载至<a href="http://www.jianshu.com/p/ec2c8acf63cd" target="_blank" rel="external">http://www.jianshu.com/p/ec2c8acf63cd</a></p>
+<p>菜鸟阶段</p>
+<p>初阶:注册与初识</p>
+<p>首先需要申请七牛账号，如果你也需要申请，请访问<a href="https://portal.qiniu.com/signup?code=3li1yiwtbd3ki" target="_blank" rel="external">这个连接</a>，这样我也可以获得更多的流量（5GB）。你们注册之后在个人中心也会获得邀请链接，要是觉得可以就双赢吧。注册过程就不多说了，都会的。</p>
+<p>接下来你会进到这个里面，里面有多种服务，当然你们需要可以自行解决需求，今天我们只讲图片要用到的</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3305482-776049bf088bbf06.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>看到图片中的服务了吧，现在只需要点击对象存储这个就可以创建空间了，然后在里面选择配置吧。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3305482-bd3c360707aff31a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>亲测没什么大碍，上面说“ 华北区域尚未支持自定义数据处理服务，一旦创建区域无法修改，请谨慎选择。 ”所以默默选择了华东，然后控制是我选的是公开的，私有的获取外链方式不一样后续介绍。好了，恭喜你，你已经完成了菜鸟任务。</p>
+<p>中鸟阶段</p>
+<p>进阶:使用与相识</p>
+<p>接下来，我们该使用强大的服务了。在内容管理中找到上传文件。</p>
+<p><img src="http://om89n3k0y.bkt.clouddn.com/QQ%E6%88%AA%E5%9B%BE20170303153235.png" alt="image"></p>
+<p>然后就会进到上传的页面，选择文件，接下来都会啦。然后关闭后，回到了文件上传列表界面。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3305482-6c33aa4af501ade4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image"></p>
+<p>后面的复制外链点击后就可以了，然后回到md文件中只要写上图片语法就可以引用了。<br>![自己定义的图片名字](复制过来的外链）<br>OK了，这个时候你重新部署一下，看看是不是文章里已经有图片了呢，好处多多，不一一说明。那么中鸟就可以了，老鸟干什么？来吧！</p>
+<p>注意：<br>七牛目前只支持一个请求上传一个文件，所以一次上传多个文件的话，就等同于一次发送多个请求，七牛不支持。<br>七牛提供如下解决方案：<br>服务端，在上传的业务逻辑里加个循环<br>客户端，使用七牛提供的js sdk 实例：<br><a href="http://jssdk.demo.qiniu.io/" target="_blank" rel="external">http://jssdk.demo.qiniu.io/</a></p>
+<p>批量上传工具：<br><a href="http://developer.qiniu.com/docs/v6/tools/qrsync.html" target="_blank" rel="external">http://developer.qiniu.com/docs/v6/tools/qrsync.html</a><br><a href="http://developer.qiniu.com/docs/v6/tools/qrsbox.html" target="_blank" rel="external">http://developer.qiniu.com/docs/v6/tools/qrsbox.html</a><br><a href="http://developer.qiniu.com/docs/v6/tools/qshell.html" target="_blank" rel="external">http://developer.qiniu.com/docs/v6/tools/qshell.html</a> -&gt;<br><a href="https://github.com/qiniu/qshell/wiki/qupload" target="_blank" rel="external">https://github.com/qiniu/qshell/wiki/qupload</a></p>
+<p>老鸟阶段</p>
+<p>高阶:我要上天</p>
+<p>对于想弄懂深入的老鸟们，上述仅仅够用当然是不行的，来看看下面吧。<br>刚才说公开空间和私有空间的区别，对就在这：</p>
+<p>公开空间：</p>
+<p>1.直接在界面上获得链接（上述图片已经演示了）。<br>2.如果在给bucket绑定了域名的话，可以通过以下地址访问。</p>
+<p>http://<domain>/<key></key></domain></p>
+<p>其中<domain>是bucket所对应的域名。七牛云为每一个bucket提供一个默认域名。用户也可以将自有的域名绑定到bucket上，通过自有域名访问七牛云,不过我没打算付费，所以“您的账户余额少于10元，暂无权限使用融合 CDN， 点击充值”，没办法使用自己的域名，不影响使用没必要了。 <key>可理解为文件名，但可包含文件分隔符等其它字符。可参考：特殊 key 资源的访问</key></domain></p>
+<p>注意： key必须采用utf8编码，如使用非utf8编码访问七牛云将反馈错误</p>
+<p>私有空间：</p>
+<p>私有资源必须通过临时下载凭证(downloadToken)进行下载，如下：</p>
+<p>[GET] http://<domain>/<key>?e=<deadline>token=<downloadtoken><br>注意，尖括号不是必需，代表替换项。</downloadtoken></deadline></key></domain></p>
+<p>deadline 由服务器时间加上 指定秒数 表示过期时间点。默认 3600 秒，服务器时间需校准，不要与标准时间相差太大。 downloadToken 可以使用 SDK 提供的方法生成。<br>公开私有空间解释的参考文档来源</p>
+<p>如有问题更多连接请移步：<br>七牛云知识库<br>开发者文档</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/03/03/七牛云图片存储/" data-id="ciztib7ge0002zkvthje517p8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-windows下github+node+git+hexo搭建个人博客" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/03/windows下github+node+git+hexo搭建个人博客/" class="article-date">
@@ -199,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/03/windows下github+node+git+hexo搭建个人博客/" data-id="ciztgy63w0001qwvtxhk0ill5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/03/windows下github+node+git+hexo搭建个人博客/" data-id="ciztib7ga0001zkvt7ij3345a" class="article-share-link">Share</a>
       
       
     </footer>
@@ -244,7 +311,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/03/hello-world/" data-id="ciztgy63s0000qwvth0lkpls8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/03/hello-world/" data-id="ciztib7g50000zkvtovs1yfkd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -282,6 +349,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/03/03/七牛云图片存储/">七牛云图片存储</a>
+          </li>
         
           <li>
             <a href="/2017/03/03/windows下github+node+git+hexo搭建个人博客/">windows下github+node+git+hexo搭建个人博客</a>
